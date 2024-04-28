@@ -6,11 +6,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>入力画面</title>
+    <title th:text="#{input.title}"></title>
 </head>
 <body>
     <div layout:fragment="content">
-        入力画面<br>
+        <h1 th:text="#{input.title}"></h1>
+        <form th:action="@{/output}" method="get" th:object="${inputList}">
+            <table>
+                <tr>
+                    <th th:text="#{input.label.chapter}"></th>
+                    <th th:text="#{input.label.question}"></th>
+                </tr>
+                <tr th:each="record, st: *{records}">
+                    <td>
+                        <input type="text" th:field="*{records[__${st.index}__].chapter}">
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{records[__${st.index}__].question}">
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" th:text="#{input.button.shuffle}"><span></span></button>
+        </form>
     </div>
 </body>
 </html>

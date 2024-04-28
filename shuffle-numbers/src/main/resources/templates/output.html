@@ -6,11 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>出力画面</title>
+    <title th:text="#{output.title}"></title>
 </head>
 <body>
     <div layout:fragment="content">
-        出力画面<br>
+        <h1 th:text="#{output.title}"></h1>
+        <table th:object="${inputList}">
+            <tr th:each="record, st: *{records}">
+                <td th:text="${record.chapter}"></td>
+                <td th:text="${record.question}"></td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>
