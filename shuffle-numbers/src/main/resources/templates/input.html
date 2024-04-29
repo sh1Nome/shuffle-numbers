@@ -11,7 +11,7 @@
 <body>
     <div layout:fragment="content">
         <h1 th:text="#{input.title}"></h1>
-        <form th:action="@{/output}" method="get" th:object="${inputList}">
+        <form id="form" th:action="@{/output}" method="get" th:object="${inputList}">
             <table>
                 <tr>
                     <th th:text="#{input.label.chapter}"></th>
@@ -26,8 +26,11 @@
                     </td>
                 </tr>
             </table>
+            <button type="button" th:text="#{input.button.add}"></button>
             <button type="submit" th:text="#{input.button.shuffle}"></button>
         </form>
+        <script th:inline="javascript">
+        </script>
     </div>
 </body>
 </html>
