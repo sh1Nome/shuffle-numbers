@@ -10,26 +10,54 @@
 </head>
 <body>
     <div layout:fragment="content">
+
         <h1 th:text="#{input.title}"></h1>
-        <form id="form" th:action="@{/output}" method="get" th:object="${inputList}">
+
+        <form id="form" th:action="@{/output}" method="get">
             <table>
                 <tr>
                     <th th:text="#{input.label.chapter}"></th>
                     <th th:text="#{input.label.question}"></th>
                 </tr>
-                <tr th:each="record, st: *{records}">
+                <tr v-for="record in getAllRecord">
                     <td>
-                        <input type="text" th:field="*{records[__${st.index}__].chapter}">
+                        <input type="text" :name="record.chapter">
                     </td>
                     <td>
-                        <input type="text" th:field="*{records[__${st.index}__].question}">
+                        <input type="text" :name="record.question">
                     </td>
                 </tr>
             </table>
-            <button type="button" th:text="#{input.button.add}"></button>
+            <button type="button" th:text="#{input.button.add}" @click="addRecord()"></button>
             <button type="submit" th:text="#{input.button.shuffle}"></button>
         </form>
+
         <script th:inline="javascript">
+            const { createApp } = Vue;
+            createApp({
+                data() {
+                    return {
+                        recordsSize: 1
+                    }
+                },
+                methods: {
+                    addRecord() {
+                        this.recordsSize++;
+                    }
+                },
+                computed: {
+                    getAllRecord() {
+                        const records = [];
+                        for (var i = 0; i < this.recordsSize; i++) {
+                            var record = {};
+                            record.chapter = "records[" + i + "].chapter";
+                            record.question = "records[" + i + "].question";
+                            records.push(record);
+                        }
+                        return records;
+                    }
+                }
+            }).mount('#form');
         </script>
     </div>
 </body>
