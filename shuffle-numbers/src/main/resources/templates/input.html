@@ -29,6 +29,7 @@
                 </tr>
             </table>
             <button type="button" th:text="#{input.button.add}" @click="addRecord()"></button>
+            <button type="button" th:text="#{input.button.delete}" @click="deleteRecord()"></button>
             <button type="submit" th:text="#{input.button.shuffle}"></button>
         </form>
 
@@ -43,6 +44,12 @@
                 methods: {
                     addRecord() {
                         this.recordsSize++;
+                    },
+                    deleteRecord() {
+                        this.recordsSize--;
+                        if (this.recordsSize < 1) {
+                            this.recordsSize = 1;
+                        }
                     }
                 },
                 computed: {
