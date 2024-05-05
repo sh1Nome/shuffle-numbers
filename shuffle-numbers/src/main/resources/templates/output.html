@@ -11,10 +11,9 @@
 <body>
     <div layout:fragment="content">
         <h1 th:text="#{output.title}"></h1>
-        <table th:object="${inputList}">
-            <tr th:each="record, st: *{records}">
-                <td th:text="${record.chapter}"></td>
-                <td th:text="${record.question}"></td>
+        <table>
+            <tr th:each="record, st: ${questionList}">
+                <td th:text="${record}"></td>
             </tr>
         </table>
     </div>
